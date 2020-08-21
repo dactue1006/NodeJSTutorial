@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head') -%>
+  <title>Home</title>
+</head>
+
+<body>
+  <!-- header -->
+  <%- include('../../partials/header') -%>
+  <!-- end header -->
+
+  <!-- main -->
+  <main class="container my-5">
+    <h1 class="text-center my-5">To do List</h1>
+    <div class="mb-3 text-right">
+      <a href="/todos/new" class="btn btn-primary">New to do</a>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Expired Date</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% todos.forEach(function(todo, index){ %>
+        <tr>
+          <th scope="row"><%= index + 1%></th>
+          <td><a href="/todos/<%=todo._id%>/detail"><%= todo.name %></a></td>
+          <td><%= todo.description %></td>
+          <td><%= new Date(todo.expiredDate).toISOString().slice(0, 10) %></td>
+          <td>
+            <a href="/todos/<%=todo._id%>/edit" class="btn btn-warning">
+              Edit
+            </a>
+            <button type="button" class="btn btn-danger" data-toggle="modal"
+              data-target="#deleteTodoModal_<%=todo._id%>">
+              Delete
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="deleteTodoModal_<%=todo._id%>" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-center" id="exampleModalLabel">Delete to do</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body text-center">
+                    Are you sure to delete this to do?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <a href="/todos/<%=todo._id%>/delete" class="btn btn-danger">Delete</a>
+                  </div>
+                </div>
+              </div>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </main>
+  <!-- end main -->
+
+  <!-- footer -->
+  <%- include('../../partials/footer') -%>
+  <!-- end footer -->
+
+  <!-- script -->
+  <%- include('../../partials/script') -%>
+  <!-- end script -->
+</body>
+
+</html>

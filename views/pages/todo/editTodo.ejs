@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head') -%>
+  <title>Home</title>
+</head>
+
+<body>
+  <!-- header -->
+  <%- include('../../partials/header') -%>
+  <!-- end header -->
+
+  <!-- main -->
+  <main class="container my-5">
+    <h1 class="text-center my-5">Edit to do</h1>
+    <div class="row">
+      <div class="col-md-3"></div>
+      <form method="POST" class="col-md-6 col-12">
+        <div class="form-group">
+          <label for="todoName">Name:</label>
+          <input name="name" type="text" required class="form-control" id="todoName" value="<%=todo.name%>">
+        </div>
+        <div class="form-group">
+          <label for="todoDescription">Description:</label>
+          <textarea name="description" class="form-control"value required id="todoDescription" rows="2"><%= todo.description %></textarea>
+        </div>
+        <div class="form-group">
+          <label for="todoExpiredDate">Expired Date:</label>
+          <input name="expiredDate" type="date" required value="<%=new Date(todo.expiredDate).toISOString().slice(0, 10)%>"
+            class="form-control" id="todoExpiredDate">
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="/todos" type="button" class="btn btn-outline-primary">Cancel</a>
+      </form>
+    </div>
+  </main>
+  <!-- end main -->
+
+  <!-- footer -->
+  <%- include('../../partials/footer') -%>
+  <!-- end footer -->
+
+  <!-- script -->
+  <%- include('../../partials/script') -%>
+  <!-- end script -->
+</body>
+
+</html>
