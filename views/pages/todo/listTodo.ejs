@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('../../partials/head') -%>
+  <title>Home</title>
+</head>
+
+<body>
+  <!-- header -->
+  <%- include('../../partials/header') -%>
+  <!-- end header -->
+
+  <!-- main -->
+  <main class="container my-5">
+    <h1 class="text-center my-5">To do List</h1>
+    <div class="mb-3 text-right">
+      <a href="/todos/new" class="btn btn-primary">New to do</a>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Expired Date</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% todos.forEach(function(todo, index){ %>
+        <tr>
+          <th scope="row"><%= index + 1%></th>
+          <td><a href="/todos/<%=todo._id%>/detail"><%= todo.name %></a></td>
+          <td><%= todo.description %></td>
+          <td><%= new Date(todo.expiredDate).toISOString().slice(0, 10) %></td>
+          <td> 
+            <a href="/todos/<%=todo._id%>/edit" class="btn btn-warning">Edit</a>
+            <a href="/todos/<%=todo._id%>/delete" class="btn btn-danger">Delete</a>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </main>
+  <!-- end main -->
+
+  <!-- footer -->
+  <%- include('../../partials/footer') -%>
+  <!-- end footer -->
+
+  <!-- script -->
+  <%- include('../../partials/script') -%>
+  <!-- end script -->
+</body>
+
+</html>
